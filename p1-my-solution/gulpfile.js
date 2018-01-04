@@ -103,13 +103,13 @@ gulp.task("images:minify", function () {
 gulp.task("images:compress", function () {
     gulp.src("images_src/**/*.*")
     .pipe(image({
-        jpegRecompress: true,
+        jpegRecompress: ['--strip', '--quality', 'medium', '--min', 6, '--max', 8],
         jpegoptim: false,
-        mozjpeg: true,
-        concurrent: 10
+        mozjpeg: false,
+        concurrent: 10,
     }))
-    .pipe(gulp.dest("tmp"));
-})
+    .pipe(gulp.dest("images_src/compressed2"));
+});
 
 // Build Sequences
 // ---------------
