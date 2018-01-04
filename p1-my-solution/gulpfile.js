@@ -5,7 +5,11 @@ var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
+var image = require("gulp-image");
 var imagemin = require('gulp-imagemin');
+var jpegRecompress = require("imagemin-jpeg-recompress");
+var mozjpeg = require("imagemin-mozjpeg");
+var jpegoptim = require('jpegoptim-bin');
 var responsive = require("gulp-responsive");
 var $ = require("gulp-load-plugins")();
 var cache = require('gulp-cache');
@@ -16,81 +20,102 @@ var runSequence = require('run-sequence');
 // -----------------
 
 // Start browserSync server
-gulp.task('browserSync', function() {
-  browserSync({
-    server: {
-      baseDir: './'
-    }
-  })
+gulp.task('browserSync', function () {
+    browserSync({
+        server: {
+            baseDir: './'
+        }
+    })
 })
 
 // Watchers
-gulp.task('watch', function() {
-  gulp.watch('*.css', browserSync.reload);
-  gulp.watch('*.html', browserSync.reload);
-  gulp.watch('*.js', browserSync.reload);
+gulp.task('watch', function () {
+    gulp.watch('*.css', browserSync.reload);
+    gulp.watch('*.html', browserSync.reload);
+    gulp.watch('*.js', browserSync.reload);
 })
 
 // Responsive images
-gulp.task("images:responsive", function(){
+gulp.task("images:responsive", function () {
     return gulp.src(["images_src/*.{png,jpg}"])
-    .pipe($.responsive({
-        // resize all JPGs to different resolutions
-        "*.jpg": [{
-                width: 300, 
-                rename: {suffix: "-300px"},
+        .pipe($.responsive({
+            // resize all JPGs to different resolutions
+            "*.jpg": [{
+                    width: 300,
+                    rename: {
+                        suffix: "-300px"
+                    },
             },
-            {
-                width: 500, 
-                rename: {suffix: "-500px"},
+                {
+                    width: 500,
+                    rename: {
+                        suffix: "-500px"
+                    },
             },
-            {
-                width: 650, 
-                rename: {suffix: "-650px"},
+                {
+                    width: 650,
+                    rename: {
+                        suffix: "-650px"
+                    },
             },
-            {
-                // compress, strip metadata and rename original image
-                rename: {suffix: "-original"},
+                {
+                    // compress, strip metadata and rename original image
+                    rename: {
+                        suffix: "-original"
+                    },
             }
         ],
-        // resize all PNG to be retina ready
-        "*.png": [
-            {
-                width: 250,
+            // resize all PNG to be retina ready
+            "*.png": [
+                {
+                    width: 250,
             },
-            {
-                width: 250*2,
-                rename: {suffix: "@2x"},
+                {
+                    width: 250 * 2,
+                    rename: {
+                        suffix: "@2x"
+                    },
             }
         ],
-    }, {
-        // Global configuration for all images
-        // The output quality for JPEG, Webp and TIFF output formats
-        quality: 70,
-        // Use progressive (interlace) scan for JPEG and PNG output
-        progressive: true,
-        // Strip all metadata
-        widthMetadata: false,
-    }))
-    .pipe(gulp.dest("images_src/responsive"));
+        }, {
+            // Global configuration for all images
+            // The output quality for JPEG, Webp and TIFF output formats
+            quality: 70,
+            // Use progressive (interlace) scan for JPEG and PNG output
+            progressive: true,
+            // Strip all metadata
+            widthMetadata: false,
+        }))
+        .pipe(gulp.dest("images_src/responsive"));
 });
 
-// Optimiziation tasks
+// Optimization tasks
 // -------------------
 
-gulp.task("images:minify", function(){
-    return gulp.src("images_src/**/*.+(png|svg|jpg|jpeg|gif)")
-    .pipe(imagemin({
-        interlaced: true
-    }))
-    .pipe(gulp.dest("images_src/compressed"))    
+gulp.task("images:minify", function () {
+    return gulp.src("images_src/**/*")
+        .pipe(imagemin([imageminMozJpeg()], {
+            verbose: true
+        }))
+        .pipe(gulp.dest("images_src/compressed"));
 });
+
+gulp.task("images:compress", function () {
+    gulp.src("images_src/**/*.*")
+    .pipe(image({
+        jpegRecompress: true,
+        jpegoptim: false,
+        mozjpeg: true,
+        concurrent: 10
+    }))
+    .pipe(gulp.dest("tmp"));
+})
 
 // Build Sequences
 // ---------------
 
-gulp.task('default', function(callback) {
-  runSequence(['browserSync'], 'watch',
-    callback
-  )
+gulp.task('default', function (callback) {
+    runSequence(['browserSync'], 'watch',
+        callback
+    )
 });
