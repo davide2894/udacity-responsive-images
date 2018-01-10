@@ -1,0 +1,22 @@
+body {
+    font-family: sans-serif;
+    margin: 2em;
+}
+.wrapper {
+    width: 800px;
+    margin: 0 auto;
+}
+h1 {
+    margin: 0 auto 1em auto;
+}
+img {
+    max-width: 100%;
+}
+figcaption {
+    margin-top: 1em;
+    color: #333;
+}
+article p{
+    text-align: justify;
+    line-height: 1.5em;
+}
