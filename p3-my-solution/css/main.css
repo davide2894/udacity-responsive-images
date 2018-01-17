@@ -1,6 +1,10 @@
+body {
+    background: #ddd;
+}
 /*
     LINKS
 */
+
 [class*="zocial-"]:before {
     color: black;
     display: inline-block;
@@ -12,6 +16,7 @@
 a:hover [class*="zocial-"]:before {
     color: #3d85c6;
 }
+
 #social {
     margin-left: auto;
     margin-right: auto;
@@ -19,27 +24,32 @@ a:hover [class*="zocial-"]:before {
     -ms-flex-align: center;
     align-items: center;
 }
-#social>a{
+
+#social > a {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     display: inline-block;
     border-top: 1px solid #ddd;
     padding-top: 1em;
 }
+
 a {
     color: #3d85c6;
     text-decoration: none;
 }
+
 a:hover {
     color: #3d85c6;
     text-decoration: underline;
 }
+
 a#viewSource {
     border-top: 1px solid #ddd;
     display: block;
     margin: 1em auto 0 auto;
     padding-top: 1em;
 }
+
 div#social a {
     margin: 0 1em 0 0;
 }
@@ -53,12 +63,18 @@ div#social a:last-of-type {
     LAYOUT
  ******************************
  */
+
 body {
-     overflow-x: hidden;
+    overflow-x: hidden;
+
+}
+.page-wrapper {
+    padding: 0.8em;
 }
 /*
     Header
 */
+
 header {
     max-width: 50em;
     display: -webkit-box;
@@ -70,15 +86,18 @@ header {
     flex-direction: column;
     margin: 0 auto;
 }
+
 header:hover svg#logo {
     fill: #3d85c6;
     -webkit-filter: drop-shadow(3px 3px 3px #ddd);
     filter: drop-shadow(3px 3px 3px #ddd);
 }
+
 h1 {
     margin: 0.5em auto;
     font-size: 7vw;
 }
+
 svg#logo {
     display: block;
     fill: #666;
@@ -90,6 +109,7 @@ svg#logo {
 /*
     Article
 */
+
 article {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -102,17 +122,19 @@ article {
     margin: 0 auto;
     border-bottom: 1px solid #ddd;
 }
+
 footer {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex; 
-    -webkit-box-orient: vertical; 
-    -webkit-box-direction: normal; 
-    -ms-flex-direction: column; 
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
 }
+
 div#social,
-a#viewSource{
+a#viewSource {
     line-height: 2em;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -165,6 +187,7 @@ p {
     color: #444;
     font-size: 1.15em;
 }
+
 .main-text {
     margin-top: 0;
 }

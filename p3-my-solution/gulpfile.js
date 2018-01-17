@@ -36,14 +36,12 @@ gulp.task('watch', function () {
 // Responsive images
 gulp.task("images:responsive", ["clean:responsive"], function () {
     return gulp.src(["./images_src/*.{png,jpg}"])
+        .pipe(cache(imagemin({
+            interlaced: true,
+        })))
         .pipe($.responsive({
             // resize all JPGs to different resolutions
-            "*.jpg": [{
-                    width: 300,
-                    rename: {
-                        suffix: "-small"
-                    },
-            },
+            "*.jpg": [
                 {
                     width: 800,
                     rename: {
@@ -56,12 +54,7 @@ gulp.task("images:responsive", ["clean:responsive"], function () {
                         suffix: "-2x"
                     },
             },
-                {
-                    // compress, strip metadata and rename original image
-                    rename: {
-                        suffix: "-original"
-                    },
-                }
+
         ],
             // resize all PNG to be retina ready
             "*.png": [
@@ -87,9 +80,8 @@ gulp.task("images:responsive", ["clean:responsive"], function () {
             withoutEnlargement: true,
             skipOnEnlargement: false, 
             errorOnEnlargement: false,
-            crop: true,
         }))
-        .pipe(gulp.dest("./responsive"));
+        .pipe(gulp.dest("./images"));
 });
 
 // Optimization Tasks 
@@ -122,7 +114,7 @@ gulp.task("image-resize", function () {
     gulp.src("./images_src/*.{jog,png}")
         .pipe(parallel(
             imageResize({
-
+                    
             })
         ))
     
