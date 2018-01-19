@@ -1,5 +1,6 @@
 body {
-    background: #ddd;
+    margin: 0;
+    overflow-x: hidden;
 }
 /*
     LINKS
@@ -9,12 +10,12 @@ body {
     color: black;
     display: inline-block;
     font-family: 'zocial', sans-serif;
-    text-shadow: 3px 3px 3px #aaa;
+    text-shadow: 3px 3px 3px indianred;
     width: 2em;
 }
 
 a:hover [class*="zocial-"]:before {
-    color: #3d85c6;
+    color: indianred;
 }
 
 #social {
@@ -34,12 +35,12 @@ a:hover [class*="zocial-"]:before {
 }
 
 a {
-    color: #3d85c6;
+    color: hotpink;
     text-decoration: none;
 }
 
 a:hover {
-    color: #3d85c6;
+    color: hotpink;
     text-decoration: underline;
 }
 
@@ -64,13 +65,6 @@ div#social a:last-of-type {
  ******************************
  */
 
-body {
-    overflow-x: hidden;
-
-}
-.page-wrapper {
-    padding: 0.8em;
-}
 /*
     Header
 */
@@ -88,24 +82,32 @@ header {
 }
 
 header:hover svg#logo {
-    fill: #3d85c6;
-    -webkit-filter: drop-shadow(3px 3px 3px #ddd);
-    filter: drop-shadow(3px 3px 3px #ddd);
+    fill: indianred;
+    -webkit-filter: drop-shadow(3px 3px 3px indianred);
+    filter: drop-shadow(3px 3px 3px black);
 }
 
 h1 {
-    margin: 0.5em auto;
     font-size: 7vw;
 }
 
 svg#logo {
     display: block;
-    fill: #666;
+    fill: #333;
     height: 6vw;
     width: 6vw;
     margin: 1em auto 0 auto;
 }
 
+picture#banner img{
+  -webkit-filter: saturate(3) opacity(0.8);
+    max-width: 100vw;
+    width: 100vw;
+    opacity; 
+}
+picture#grasshopper img{
+    filter: saturate(1);
+}
 /*
     Article
 */
@@ -120,7 +122,8 @@ article {
     flex-direction: column;
     max-width: 50em;
     margin: 0 auto;
-    border-bottom: 1px solid #ddd;
+    padding: 0 1em;
+    border-bottom: 1px solid indianred;
 }
 
 footer {
@@ -131,6 +134,7 @@ footer {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    max-width: 50em;
 }
 
 div#social,
@@ -145,7 +149,7 @@ a#viewSource {
 }
 
 figcaption {
-    color: #bb021e;
+    color: indianred;
     margin: 1em auto 0 auto;
 }
 
@@ -164,28 +168,33 @@ figcaption {
     text-align: center;
 }
 
-h1,
-h2 {
-    color: #333;
-}
-
 h2 {
     font-size: 4w;
     color: #bb021e;
     margin-top: 1.2em;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #333;
 }
 
-img {
+img,
+#flower {
     max-width: 100%;
 }
 
-p {
+h1,
+picture>figcaption,
+footer a{
+    color: #333;
+}
+h2{
+    color: indianred;
+    font-size: 5vw;
+}
+p{
     text-align: justify;
     line-height: 1.4;
-    color: #444;
     font-size: 1.15em;
+    color: #333;
 }
 
 .main-text {

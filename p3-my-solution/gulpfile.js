@@ -52,7 +52,7 @@ gulp.task("images:responsive", ["clean:responsive"], function () {
                     width: 1600,
                     rename: {
                         suffix: "-2x"
-                    },
+                    }
             },
 
         ],
