@@ -34,7 +34,7 @@ gulp.task('watch', function () {
 })
 
 // Responsive images
-gulp.task("images:responsive", ["clean:responsive"], function () {
+gulp.task("images:responsive", function () {
     return gulp.src(["./images_src/*.{png,jpg}"])
         .pipe(cache(imagemin({
             interlaced: true,
@@ -44,12 +44,14 @@ gulp.task("images:responsive", ["clean:responsive"], function () {
             "*.jpg": [
                 {
                     width: 800,
+                    height: 600,
                     rename: {
                         suffix: "-1x"
                     },
             },
                 {
                     width: 1600,
+                    height: 1200,
                     rename: {
                         suffix: "-2x"
                     }
@@ -67,7 +69,7 @@ gulp.task("images:responsive", ["clean:responsive"], function () {
                         suffix: "@ 2x"
                     },
             }
-        ],
+        ],        
         }, {
             // Global configuration for all images
             // The output quality for JPEG, Webp and TIFF output formats
@@ -81,7 +83,7 @@ gulp.task("images:responsive", ["clean:responsive"], function () {
             skipOnEnlargement: false, 
             errorOnEnlargement: false,
         }))
-        .pipe(gulp.dest("./images"));
+        .pipe(gulp.dest("./img_resp"));
 });
 
 // Optimization Tasks 
